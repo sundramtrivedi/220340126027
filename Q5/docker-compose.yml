@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+    broker :
+        image : eclipse-mosquitto
+        hostname : broker
+        container_name : broker
+        expose :
+            - "1883"
+        ports :
+            - 5000:1883
+        volumes :
+            - /home/diot/220340126027/Q5/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    publisherexam :
+        build : .
+        container_name : publisherexam
+        hostname : pub
+        depends_on :
+            - broker
