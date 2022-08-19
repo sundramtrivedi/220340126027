@@ -1,0 +1,31 @@
+1. Search for EC2 service in the search bar in the AWS console.
+2. Click of Launch Instance
+3. Under Names and Tags section, give a name to your Instance
+4. Under Application and OS Image select the Ubuntu OS
+4.1 Under AMI select the Ubuntu 20.04 Free Tier
+5. Under Key pair menu click of Create a new key pair option
+    If you already have a key pair you can select it from the drop down menu
+6. Under Network Settings, select the Create security group under Firewall
+7. Now, click on Launch Instance
+8. After the instance is in running state, click on it.
+9. In Security menu, click on Security group
+9.1 In inbound rules edit the inbound rule.
+9.2 In the type drop down select Custom TCP.
+9.3 Add port range as 1883
+9.4 Add Source as Anywhere-IPv4
+9.5 Repeat the same steps for adding SSH on port 22
+10. Click on Save rules
+11. Go back to instances and select your instance and click of connect
+    you will see a connect again click on it and you will get the terminal of your instance
+12. Do the require steps to install mosquitto in the instance
+13. Create a mosq.conf file in your current directory with the following lines in it
+    listener 1883
+    allow_anonymous true
+14. Now use the following command to run the broker with the custom conf file
+    /usr/sbin/mosquitto -c mosq.conf
+13. In your local machine's terminal type the following command
+    mosquitto_sub -t "topic" -h "instance_public_ip" -p 1883
+14. Open a new terminal and run the below command
+    mosquitto_pub -t "topic" -h "instance_public_ip" -p 1883 -m "temperature : 40"
+15. The connection is correct then you will be able to see the data in the mosquitto_sub terminal
+    
