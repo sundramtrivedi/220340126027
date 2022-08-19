@@ -1,0 +1,4 @@
+1. Search IAM then select Users then create user through add user.
+
+2. Give a name allow all permission ans set all permission boundary then next and create a user.
+
